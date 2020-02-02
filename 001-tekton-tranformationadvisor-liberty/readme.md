@@ -12,12 +12,12 @@
 
 ## Steps
 
-* View the migration Complexity in TA
-* Push the migration artifacts to GIT Repo from TA
-* Configure a Webhook in Tekton for the GIT Repo
-* Modify the source code in GIT Repo
-* View the CICD pipeline running in Tekton
-* View the deployed application in OC
+* View Migration Complexity in TA
+* Push Migration artifacts to GIT Repo from TA
+* Configure a Webhook in Tekton
+* Modify source code in GIT
+* View Tekton pipeline running
+* View application deployed in OC
 * Access the application in browser
 
 
@@ -25,7 +25,7 @@
 
 1. The applications are assessed using TA Data collector and results are uploaded to TA. The migration complexity page is displaying the details of the application.
 
-It shows the JKE application complexity as well. 
+The page shows the JKE application complexity as well. 
 
 ![Migration Complexity](images/01-ta-complexity-page1.png?raw=true "Migration Complexity")
 
@@ -52,12 +52,15 @@ It shows the JKE application complexity as well.
 
 ## Push Migration Bundle to GIT
 
-1. Create a new repo in GIT for this application.
+1. Create a new empty repo in GIT for this application as like this.
 
 ![Git Repo](images/06-git-create-repo.png?raw=true "Git Repo")
 
 
-2. Enter the `Git Repo`, `UserId`, `User Token` details and Click `Send to Git` button in the TA.
+2. GIT details
+
+a) Enter the `Git Repo`, `UserId`, `User Token` details 
+b) Click `Send to Git` button in the TA.
 
 ![GIT Param](images/07-ta-git-1.png?raw=true "GIT Param")
 
@@ -76,43 +79,51 @@ The artifacts are being send to GIT
 
 ![Issue in dockerfile](images/10-git-modify-dockerfile-1.png?raw=true "Issue in dockerfile")
 
-2. The above line to be commented and the below lines to be added.
+2. Comment the above line and add the below lines.
 
 ```
 RUN mkdir -p /opt/ibm/wlp/usr/shared/config/lib/config-temp
 COPY --chown=1001:0 --from=build-stage /config/ /opt/ibm/wlp/usr/shared/config/lib/config-temp
 RUN cp -r /opt/ibm/wlp/usr/shared/config/lib/config-temp/ /config/ 
 ```
-![Updated dockerfile](images/11-git-modify-dockerfile-2.png?raw=true "Updated dockerfile")
 
+as like this.
+
+![Updated dockerfile](images/11-git-modify-dockerfile-2.png?raw=true "Updated dockerfile")
 
 Don't forget to commit the file.
 
 ## Create Webhook in Tekton
 
-1. Install `ta-liberty-pipeline-pro` pipeline.
+#### 1. Install `ta-liberty-pipeline-pro` pipeline.
 
-Here we are going to use the custom tekton pipeline created in the namespace `ta-liberty-pipeline-pro`. You can skip this step, if it is already installed.
+Here we are going to use the custom tekton pipeline created in the namespace `ta-liberty-pipeline-pro`. You don't need to install if it is already installed.
 
 To install the pipeline you can refer the link [Installing ta-liberty-pipeline](https://github.com/GandhiCloud/tekton/tree/master/001-tekton-tranformationadvisor-liberty/ta-liberty-pipeline)
 
-2. Open Add Webhook page
+#### 2. Open Add Webhook page
 
-a) Open the Tekton Web UI
-b) Choose the namespace `ta-liberty-pipeline-pro`
-c) Click on `Webhooks` in the left menu
-d) Click on `Add Webhook` button in the Webhooks screen
+Open the Tekton Web UI
+
+1) Choose the namespace `ta-liberty-pipeline-pro`
+
+2) Click on `Webhooks` in the left menu
+
+3) Click on `Add Webhook` button in the Webhooks screen
+
 
 ![Create Webhook](images/12-tekton-webhook-create.png?raw=true "Create Webhook")
 
-3. Enter Webhook details and click `create` button
+#### 3. Enter Webhook details
+
+Enter Webhook details and click `create` button
 
 | S.No| Property Name  | Values |  Comments | 
 | ---|------------- | ------------- |
-|  1| Name  | jke  | | Any name can be given
+|  1| Name  | jke  | | Any name can be given| 
 | 2 | Repository URL  | https://github.ibm.com/JeyaGandhi/ta-jke.git  | |
-| 3  |   Access Token  | Select the git-hub access token from the list. Otherwise click + button to enter Github user and Personal access token|
-|   |  |  | 
+| 3  |   Access Token  | Select the git-hub access token from the list. Otherwise click + button to enter Github user and Personal access token|| 
+|   |  |  | | 
 |  4| Namespace  | ta-liberty-pipeline-pro  | The namespace where the pipeline is available.|
 |  5| Pipeline  | ta-liberty-pipeline-pipeline  | The name of the pipeline|
 |  6| Service account  | ta-liberty-pipeline-service-account  ||
@@ -120,11 +131,11 @@ d) Click on `Add Webhook` button in the Webhooks screen
 
 ![Create Webhook](images/13-tekton-webhook-entry.png?raw=true "Create Webhook")
 
-4. The webhook is created in Tekton like the below.
+#### 4. The webhook is created in Tekton like the below.
 
 ![ Webhook](images/14-tekton-webhook-created.png?raw=true " Webhook")
 
-6. See the webhook entry in the GIT repo as well.
+#### 5. See the webhook entry in the GIT repo as well.
 
 ![ Webhook in GIT](images/15-git-webhook-created.png?raw=true " Webhook in GIT")
 
