@@ -124,7 +124,7 @@ Enter Webhook details and click `create` button
 | S.No| Property Name  | Values |  Comments | 
 | ---|------------- | ------------- |-------------| 
 |  1| Name  | jke  | Any name can be given| 
-| 2 | Repository URL  | https://github.ibm.com/JeyaGandhi/ta-jke.git   |
+| 2 | Repository URL  |   | Your git repo url |
 | 3  |   Access Token  | | Select the git-hub access token from the list. Otherwise click + button to enter Github user and Personal access token|
 |  4| Namespace  | ta-liberty-pipeline-pro  | The namespace where the pipeline is available.|
 |  5| Pipeline  | ta-liberty-pipeline-pipeline  | The name of the pipeline|
