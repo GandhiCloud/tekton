@@ -10,7 +10,7 @@
 * oc CLI
 * git
 
-## Steps
+## Overview
 
 * View Migration Complexity in TA
 * Push Migration artifacts to GIT Repo from TA
@@ -20,8 +20,9 @@
 * View application deployed in OC
 * Access the application in browser
 
+## Steps
 
-## Migration Complexity in TA
+### 1. Migration Complexity in TA
 
 1. The applications are assessed using TA Data collector and results are uploaded to TA. The migration complexity page is displaying the details of the application.
 
@@ -35,29 +36,29 @@ The page shows the JKE application complexity as well.
 ![View Migration Plan](images/02-ta-complexity-page2.png?raw=true "View Migration Plan")
 
 
-## Prepare Migration Bundle
+### 2. Prepare Migration Bundle
 
-1. In the migration bundle screen choose the  `Binary` option.
+#### 1. In the migration bundle screen choose the  `Binary` option.
 
 ![Choose Binary](images/03-ta-migration-1.png?raw=true "Choose Binary")
 
-2. In the displayed screen, click `Add` button and upload your war/ear file.
+#### 2. In the displayed screen, click `Add` button and upload your war/ear file.
 
 ![Migration artifacts](images/04-ta-migration-2.png?raw=true "Migration artifacts")
 
-3. War file is uploaded and you can see the other migration artifacts as well.
+#### 3. War file is uploaded and you can see the other migration artifacts as well.
 
 ![Migration artifacts](images/05-ta-migration-3.png?raw=true "Migration artifacts")
 
 
-## Push Migration Bundle to GIT
+### 3. Push Migration Bundle to GIT
 
-1. Create a new empty repo in GIT for this application as like this.
+#### 1. Create a new empty repo in GIT for this application as like this.
 
 ![Git Repo](images/06-git-create-repo.png?raw=true "Git Repo")
 
 
-2. GIT details
+#### 2. GIT details
 
 a) Enter the `Git Repo`, `UserId`, `User Token` details 
 b) Click `Send to Git` button in the TA.
@@ -68,18 +69,18 @@ The artifacts are being send to GIT
 
 ![Send to GIT](images/08-ta-git-2.png?raw=true "Send to GIT")
 
-3. See the artifacts are copied to GIT repo.
+#### 3. See the artifacts are copied to GIT repo.
 
 ![Artifacts in GIT](images/09-git-after-bundle-push.png?raw=true "Artifacts in GIT")
 
 
-## Update Dockerfile
+### 4. Update Dockerfile
 
-1. The line no 35 in the below docker file will give issue with symbolic link. 
+#### 1. The line no 35 in the below docker file will give issue with symbolic link. 
 
 ![Issue in dockerfile](images/10-git-modify-dockerfile-1.png?raw=true "Issue in dockerfile")
 
-2. Comment the above line and add the below lines.
+#### 2. Comment the above line and add the below lines.
 
 ```
 RUN mkdir -p /opt/ibm/wlp/usr/shared/config/lib/config-temp
@@ -93,7 +94,7 @@ as like this.
 
 Don't forget to commit the file.
 
-## Create Webhook in Tekton
+### 5. Create Webhook in Tekton
 
 #### 1. Install `ta-liberty-pipeline-pro` pipeline.
 
@@ -139,7 +140,7 @@ Enter Webhook details and click `create` button
 
 ![ Webhook in GIT](images/15-git-webhook-created.png?raw=true " Webhook in GIT")
 
-## Deploy App in Openshift using Tekton
+### 6. Deploy App in Openshift using Tekton
 
 1. Modify some files in GIT Repo and commit the file.
 
@@ -160,7 +161,7 @@ Tekton pipeline should have been started.
 ![ Tekton completed](images/19-tekton-pipeline-completed.png?raw=true " Tekton completed")
 
 
-## View the Application Deployment in Openshift
+### 7. View the Application Deployment in Openshift
 
 1. Login into your Redhat Openshift Container Platform like below
 
@@ -198,3 +199,13 @@ https://9.30.223.189:31919/jkeweb
 ```
 
 ![ Application running](images/23-access-application.png?raw=true " Application running")
+
+
+## Note
+
+1. This pipeline is fully customized for TA generated Liberty artifacts.
+
+2. Many application can be deployed using pipeline by creating different webhooks.
+
+3. All the applications will be created under the namespace/project called `ta-liberty-pipeline-pro`. To generate the different namesapce, you add `namespace: <<my-namespace>>` in the yaml files available under `operator` folder of the migration bundle artifacts.
+
