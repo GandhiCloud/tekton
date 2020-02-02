@@ -92,9 +92,9 @@ Don't forget to commit the file.
 
 1. Install `ta-liberty-pipeline-pro` pipeline.
 
-Here we are going to use the custom tekton pipeline created in the namespace `ta-liberty-pipeline-pro`. You can skipp this step, if it is already installed.
+Here we are going to use the custom tekton pipeline created in the namespace `ta-liberty-pipeline-pro`. You can skip this step, if it is already installed.
 
-To install the pipeline you can refer the link [Installing ta-liberty-pipeline](https://github.com/GandhiCloud/tekton/001-tekton-tranformationadvisor-liberty/ta-liberty-pipeline)
+To install the pipeline you can refer the link [Installing ta-liberty-pipeline](https://github.com/GandhiCloud/tekton/tree/master/001-tekton-tranformationadvisor-liberty/ta-liberty-pipeline)
 
 2. Open Add Webhook page
 
