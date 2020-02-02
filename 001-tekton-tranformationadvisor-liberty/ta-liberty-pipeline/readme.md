@@ -1,8 +1,8 @@
-# Installing Tekton pipeline ta-liberty-pipeline
+# Installing Tekton pipeline `ta-liberty-pipeline`
  
 ## Steps
 
-1. Download this source code of this repo. 
+1. Download the source code of this repo. 
 
 2. Open the command prompt and get into `install` folder.
 
@@ -19,6 +19,6 @@ sh 01-install.sh
 
 ## Note
 
-1. This will install the pipeline under the namespace `ta-liberty-pipeline-pro`. To change this namespace in the yamls available in `src` folder.
+1. This will install the pipeline under the namespace `ta-liberty-pipeline-pro`. To have different namespace,  the yamls available in `src` folder have to be modified accordingly.
 
-2. This pipeline is customized for the TA generated Liberty artifacts.
+2. This pipeline is fully customized for TA generated Liberty artifacts.
