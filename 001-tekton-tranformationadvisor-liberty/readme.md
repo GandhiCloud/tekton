@@ -1,6 +1,6 @@
 # Application Migration using Transformation Advisor and Tekton pipeline
  
- Migrating a Monolith JKE application into Liberty based container application using Transformation advisor  migration artifacts, create and push the images Tekton pipeline)
+ Migrating a Monolith JKE application into Liberty based container application by using Transformation advisor  migration artifacts and Tekton pipeline)
 
 ## Prerequisites
 
@@ -24,14 +24,16 @@
 
 ### 1. Migration Complexity in TA
 
-1. The applications are assessed using TA Data collector and results are uploaded to TA. The migration complexity page is displaying the details of the application.
+#### 1. Open migration complexity page in TA.
+
+The applications are assessed using TA Data collector and results are uploaded to TA. The migration complexity page is displaying the details of the application
 
 The page shows the JKE application complexity as well. 
 
 ![Migration Complexity](images/01-ta-complexity-page1.png?raw=true "Migration Complexity")
 
 
-2. Click on the 3 dots on the right and choose the `View Migration Plan` option.
+#### 2. Click on the 3 dots on the right and choose the `View Migration Plan` option.
 
 ![View Migration Plan](images/02-ta-complexity-page2.png?raw=true "View Migration Plan")
 
@@ -120,7 +122,7 @@ Open the Tekton Web UI
 Enter Webhook details and click `create` button
 
 | S.No| Property Name  | Values |  Comments | 
-| ---|------------- | ------------- |
+| ---|------------- | ------------- |-------------| 
 |  1| Name  | jke  | | Any name can be given| 
 | 2 | Repository URL  | https://github.ibm.com/JeyaGandhi/ta-jke.git  | |
 | 3  |   Access Token  | Select the git-hub access token from the list. Otherwise click + button to enter Github user and Personal access token|| 
@@ -200,12 +202,11 @@ https://9.30.223.189:31919/jkeweb
 
 ![ Application running](images/23-access-application.png?raw=true " Application running")
 
-
 ## Note
 
 1. This pipeline is fully customized for TA generated Liberty artifacts.
 
 2. Many application can be deployed using pipeline by creating different webhooks.
 
-3. All the applications will be created under the namespace/project called `ta-liberty-pipeline-pro`. To generate the different namesapce, you add `namespace: <<my-namespace>>` in the yaml files available under `operator` folder of the migration bundle artifacts.
+3. All the applications will be deployed under the namespace/project called `ta-liberty-pipeline-pro`. To deploy in different namesapce, you need to add `namespace: <<my-namespace>>` in the yaml files available under `operator` folder of the migration bundle artifacts.
 
