@@ -17,12 +17,6 @@ spec:
       - name: namespace
         description: Namespace to deploy the application
         default: ta-liberty-apps    
-      - name: imageName
-        description: Image Name
-        default: index.docker.io/gandhicloud/ta-wcare
-      - name: imageTag
-        description: Image Tag
-        default: latest
   steps:
     - name: update-image-name-in-yaml
       image: ubuntu
@@ -45,9 +39,6 @@ spec:
           echo "file before update......"
           cat "$PATH_TO_DEPLOYMENT_FILES"
 
-          # sed -i "s#__IMAGE_NAME__#$VALUE1#g" $PATH_TO_DEPLOYMENT_FILES
-          # sed -i "s#__IMAGE_TAG__#$VALUE2#g" $PATH_TO_DEPLOYMENT_FILES
-
           sed -i "s#.*repository:.*#$VALUE1#g" $PATH_TO_DEPLOYMENT_FILES
           sed -i "s#.*tag:.*#$VALUE2#g" $PATH_TO_DEPLOYMENT_FILES
           
@@ -55,37 +46,6 @@ spec:
           cat "$PATH_TO_DEPLOYMENT_FILES"
 
           echo "Completed ......" 
-    # - name: update-image-name-in-yaml
-    #   image: alpine
-    #   command: ["sed"]
-    #   args:
-    #     - "-i"
-    #     - "-e"
-    #     - "s;__IMAGE_NAME__;$(inputs.params.imageName);g"
-    #     - "$(inputs.params.pathToDeploymentFiles)/application/application-cr.yaml"
-    # - name: update-image-tag-in-yaml
-    #   image: alpine
-    #   command: ["sed"]
-    #   args:
-    #     - "-i"
-    #     - "-e"
-    #     - "s;__IMAGE_TAG__;$(inputs.params.imageTag);g"
-    #     - "$(inputs.params.pathToDeploymentFiles)/application/application-cr.yaml"     
-    # - name: kubectl-create-namespace
-    #   image: lachlanevenson/k8s-kubectl
-    #   command: ["kubectl"]
-    #   args:
-    #     - "create"
-    #     - "namespace"
-    #     - "$(inputs.params.namespace)"
-    # - name: kubectl-set-context-namespace
-    #   image: lachlanevenson/k8s-kubectl
-    #   command: ["kubectl"]
-    #   args:
-    #     - "config"
-    #     - "set-context"
-    #     - "--current"
-    #     - "--namespace=$(inputs.params.namespace)"        
     - name: kubectl-apply-deployment-files
       image: lachlanevenson/k8s-kubectl
       command: ["kubectl"]

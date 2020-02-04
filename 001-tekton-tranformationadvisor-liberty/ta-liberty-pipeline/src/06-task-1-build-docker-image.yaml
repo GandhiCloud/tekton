@@ -20,6 +20,27 @@ spec:
       - name: image-registry
         type: image
   steps:
+    - name: update-dockerfile
+      image: ubuntu
+      command: 
+      - /bin/bash
+      args:
+        - -c
+        - |
+          echo "Started ......"
+
+          VALUE_TO_FIND="COPY --chown=1001:0 --from=build-stage /config/ /config/"
+          VALUE_TO_REPLACE="COPY --chown=1001:0 --from=build-stage /config/ /opt/ibm/wlp/usr/servers/defaultServer"
+          PATH_TO_DOCKER_FILE="$(inputs.params.pathToDockerFile)"
+
+          echo "file before update......"
+          cat "$PATH_TO_DOCKER_FILE"
+
+          sed -i "s#$VALUE_TO_FIND#$VALUE_TO_REPLACE#g" $PATH_TO_DOCKER_FILE
+          
+          echo "file after update......"
+          cat "$PATH_TO_DOCKER_FILE"
+          echo "Completed ......"    
     - name: build-and-push
       image: gcr.io/kaniko-project/executor:v0.16.0
       env:
@@ -31,4 +52,3 @@ spec:
         - "--dockerfile=$(inputs.params.pathToDockerFile)"
         - "--destination=$(outputs.resources.image-registry.url)"
         - "--context=$(inputs.params.pathToContext)"
-        - "-v=debug"

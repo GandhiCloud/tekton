@@ -53,10 +53,6 @@ spec:
           value: "$(params.pathToDeploymentFiles)"
         - name: namespace
           value: "$(params.namespace)"
-        - name: imageName
-          value: "$(inputs.resources.image-registry.url)%%:*"
-        - name: imageTag
-          value: "$(inputs.resources.image-registry.url)##*:"
       resources:
         inputs:
           - name: git-repo
