@@ -64,8 +64,7 @@ The manifest files contains the following
 * Pipeline
 
 
-
-![ Files](images/01-all-files.png?raw=true "Files"){:height="50%" width="50%"}
+![ Files](images/01-all-files.png?raw=true "Files")
 
 ### 1. Namespace
 
