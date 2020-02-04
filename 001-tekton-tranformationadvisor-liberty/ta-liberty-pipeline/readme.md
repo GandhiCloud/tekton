@@ -2,11 +2,11 @@
 
 Transformation Advisor generates migration artificats with the liberty operator.
 
-The objective of this Tekton pipeline is to build the docker image out of that TA generated artifacts and deploy the app in RedHat Openshift.
+The objective of this Tekton pipeline is to build the docker image for the TA generated artifacts and deploy the app in RedHat Openshift.
 
 So this pipeline is fully customized for TA generated Liberty artifacts.
 
-The pipleine is made in generic way so that it can used by any number of apps.
+The pipleine is made in generic way so that it can used by any number of apps (TA generated).
 
 ## Prerequisites
 
@@ -16,7 +16,7 @@ The pipleine is made in generic way so that it can used by any number of apps.
 
 ## Installing Tekton pipeline `ta-liberty-pipeline`
 
-This will install the pipeline under the namespace `ta-liberty-pipeline-pro`. To have different namespace,  the yamls available in `src` folder have to be modified accordingly.
+This will install the pipeline under the namespace `ta-liberty-pipeline-pro`. (To have different namespace,  the yaml filess available in `src` folder have to be modified accordingly).
 
 Here are the steps to install this pipeline in RHOCP.
 
@@ -58,7 +58,7 @@ This pipeline is installed under the namespace `ta-liberty-pipeline-pro`.
 The manifest files contains the following
 
 * Namespace
-* Docker and GIT secretes
+* Docker and GIT secrets
 * Service Account
 * Task
 * Pipeline
@@ -90,8 +90,8 @@ The manifest files contains the following
 ### 4. Service Account
 
 * It creates a ServiceAccount
-* It links with Docker and GIT secrets
-* Create ClusterRoleBinding between the ClusterRole called ClusterAdmin and the ServiceAccount
+* It links the ServiceAccount with Docker and GIT secrets
+* Creates ClusterRoleBinding between a ClusterRole called ClusterAdmin and the ServiceAccount
 
 ![ ServiceAccount](images/05-service-account.png?raw=true "ServiceAccount")
 
@@ -132,7 +132,7 @@ This pipeline will be called by the webhook in tekton, whenever there is a push 
 * It takes GIT Repo and Docker Image as resources
 * It takes Docker file location  and Deployment file location as a input params
 
-* It will call the above created 2 tasks
+* It will call the above created 2 tasks as part of running this pipeline.
 
 ![ Pipeline](images/10-pipeline-1.png?raw=true "Pipeline")
 ![ Pipeline](images/11-pipeline-2.png?raw=true "Pipeline")
