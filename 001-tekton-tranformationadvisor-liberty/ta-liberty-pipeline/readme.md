@@ -65,7 +65,7 @@ The manifest files contains the following
 
 
 
-![ Files](images/01-all-files.png?raw=true "Files")
+![ Files](images/01-all-files.png?raw=true "Files"){:height="50%" width="50%"}
 
 ### 1. Namespace
 
