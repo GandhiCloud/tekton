@@ -14,9 +14,6 @@ spec:
       - name: pathToDeploymentFiles
         description: Path to deployment yaml files
         default: /workspace/git-repo/operator/
-      - name: namespace
-        description: Namespace to deploy the application
-        default: ta-liberty-apps    
   steps:
     - name: update-image-name-in-yaml
       image: ubuntu

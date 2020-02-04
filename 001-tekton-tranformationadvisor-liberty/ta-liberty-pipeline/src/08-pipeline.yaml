@@ -19,15 +19,6 @@ spec:
     - name: pathToDeploymentFiles
       description: kubectl yaml files
       default: /workspace/git-repo/operator
-    - name: namespace
-      description: Namespace to deploy the application
-      default: ta-liberty-apps
-    - name: imageName
-      description: Image Name
-      default: index.docker.io/gandhicloud/ta-wcare
-    - name: imageTag
-      description: Image Tag
-      default: latest
   tasks:
     - name: task-build-docker-image
       taskRef:
@@ -51,8 +42,6 @@ spec:
       params:
         - name: pathToDeploymentFiles
           value: "$(params.pathToDeploymentFiles)"
-        - name: namespace
-          value: "$(params.namespace)"
       resources:
         inputs:
           - name: git-repo
