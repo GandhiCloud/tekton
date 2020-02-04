@@ -76,27 +76,7 @@ The artifacts are being send to GIT
 ![Artifacts in GIT](images/09-git-after-bundle-push.png?raw=true "Artifacts in GIT")
 
 
-### 4. Update Dockerfile
-
-#### 1. The line no 35 in the below docker file will give issue with symbolic link. 
-
-![Issue in dockerfile](images/10-git-modify-dockerfile-1.png?raw=true "Issue in dockerfile")
-
-#### 2. Comment the above line and add the below lines.
-
-```
-RUN mkdir -p /opt/ibm/wlp/usr/shared/config/lib/config-temp
-COPY --chown=1001:0 --from=build-stage /config/ /opt/ibm/wlp/usr/shared/config/lib/config-temp
-RUN cp -r /opt/ibm/wlp/usr/shared/config/lib/config-temp/ /config/ 
-```
-
-as like this.
-
-![Updated dockerfile](images/11-git-modify-dockerfile-2.png?raw=true "Updated dockerfile")
-
-Don't forget to commit the file.
-
-### 5. Create Webhook in Tekton
+### 4. Create Webhook in Tekton
 
 #### 1. Install `ta-liberty-pipeline-pro` pipeline.
 
@@ -141,7 +121,7 @@ Enter Webhook details and click `create` button
 
 ![ Webhook in GIT](images/15-git-webhook-created.png?raw=true " Webhook in GIT")
 
-### 6. Deploy App in Openshift using Tekton
+### 5. Deploy App in Openshift using Tekton
 
 1. Modify some files in GIT Repo and commit the file.
 
@@ -162,7 +142,7 @@ Tekton pipeline should have been started.
 ![ Tekton completed](images/19-tekton-pipeline-completed.png?raw=true " Tekton completed")
 
 
-### 7. View the Application Deployment in Openshift
+### 6. View the Application Deployment in Openshift
 
 1. Login into your Redhat Openshift Container Platform like below
 
@@ -179,24 +159,61 @@ oc login --token=NIqa12ewuV2AR-ZTAbG0v --server=https://api.ganwhite.os.fyre.ibm
 oc project ta-liberty-pipeline-pro
 ```
 
-![ OC Login](images/21-oc-project-switch.png?raw=true " OC Login")
+![ Switch Project](images/21-oc-project-switch.png?raw=true " Switch Project")
 
 
-3. Get the NodePort value from the service by running below command
+3. Get the PODs status by running the below comman d
+
+```
+oc get pods | grep jke
+```
+
+![ OC get pods](images/22-oc-get-pods.png?raw=true " OC get pods")
+
+
+3. Get the service status by running below command
 
 ```
 oc get service
 ```
 
-![ OC get Service](images/22-oc-get-svc.png?raw=true " OC get Service")
+![ OC get Service](images/23-oc-get-svc.png?raw=true " OC get Service")
+
+
+### 7. Create Route in OCP web console 
+
+1. Goto Route
+
+Choose the Project `ta-liberty-pipeline-pro` and goto Route screen.
+
+Click on the create Route.
+
+![ Route ](images/24-route-1.png?raw=true " Route")
+
+2. Enter Route details
+
+
+a) Enter the Name (any value).
+
+b) Choose Service
+
+c) Choose Port
+
+d) Click on Create
+
+![ Route ](images/25-route-2.png?raw=true " Route")
+
+3. Route is created.
+
+![ Route ](images/26-route-3.png?raw=true " Route")
 
 
 ### 8. Access the application in the browser 
 
-1. Get the application url by running the below command
+1. Get the above created url and access the application in the browser.
 
 ```
-https://9.30.223.189:31919/jkeweb
+http://jke-ta-liberty-pipeline-pro.apps.ganwhite.os.fyre.ibm.com/jkeWeb
 ```
 
 ![ Application running](images/23-access-application.png?raw=true " Application running")
