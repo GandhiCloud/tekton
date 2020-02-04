@@ -216,7 +216,7 @@ d) Click on Create
 http://jke-ta-liberty-pipeline-pro.apps.ganwhite.os.fyre.ibm.com/jkeWeb
 ```
 
-![ Application running](images/23-access-application.png?raw=true " Application running")
+![ Application running](images/27-access-application.png?raw=true " Application running")
 
 ## Note
 
