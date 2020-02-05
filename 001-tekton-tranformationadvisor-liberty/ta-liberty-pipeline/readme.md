@@ -63,28 +63,27 @@ The manifest files contains the following
 * Task
 * Pipeline
 
-
-![ Files](images/01-all-files.png?raw=true "Files")
+<img src="images/01-all-files.png" width="256" title="Files">
 
 ### 1. Namespace
 
 * This pipeline is installed under the namespace `ta-liberty-pipeline-pro`.
 
-![ Namespace](images/02-namespace.png?raw=true "Namespace")
+<img src="images/02-namespace.png" width="256"  title="Namespace">
 
 ### 2. Secret - Docker
 
 * Docker secret is available in this file.
 * Docker secret is labeled with the service account.
 
-![ Secret - Docker](images/03-secret-docker.png?raw=true "Secret - Docker")
+<img src="images/03-secret-docker.png" width="456" title="Secret - Docker">
 
 ### 3. Secret - git
 
 * GIT secret is available in this file.
 * GIT secret is labeled with the service account.
 
-![ Secret - GIT](images/04-secret-git.png?raw=true "Secret - GIT")
+<img src="images/04-secret-gitr.png" width="456" title="Secret - GIT">
 
 ### 4. Service Account
 
@@ -92,7 +91,7 @@ The manifest files contains the following
 * It links the ServiceAccount with Docker and GIT secrets
 * Creates ClusterRoleBinding between a ClusterRole called ClusterAdmin and the ServiceAccount
 
-![ ServiceAccount](images/05-service-account.png?raw=true "ServiceAccount")
+<img src="images/05-service-account.png" width="456" title="ServiceAccount">
 
 ### 5. Task - Build Docker Image
 
@@ -107,8 +106,8 @@ This task download the source code from the GIT repo, build the docker image and
 * Creates Docker image using Kaniko Executor Project.
 * Push the image to the Docker hub registry
 
-![ Build Docker Image](images/06-task-build-docker-image-1.png?raw=true "Build Docker Image")
-![ Build Docker Image](images/07-task-build-docker-image-2.png?raw=true "Build Docker Image")
+<img src="images/06-task-build-docker-image-1.png" width="456" title="Build Docker Image">
+<img src="images/07-task-build-docker-image-2.png" width="556" title="Build Docker Image">
 
 ### 6. Task - Deploy in Openshift using Kubectl
 
@@ -121,8 +120,8 @@ This tasks apply the deployment manifest files in the RHOCP using the kubectl co
 * Updates the application-cr.yaml with this Image Name and Tag.
 * Deploy the deployment manifest files using Kubectl apply through the lachlanvenson project
 
-![ Kubectl Deploy](images/08-task-deploy-kubectl-1.png?raw=true "Kubectl Deploy")
-![ Kubectl Deploy](images/09-task-deploy-kubectl-2.png?raw=true "Kubectl Deploy")
+<img src="images/08-task-deploy-kubectl-1.png" width="456" title="Kubectl Deploy">
+<img src="images/09-task-deploy-kubectl-2.png" width="556" title="Kubectl Deploy">
 
 ### 7. Pipeline
 
@@ -133,6 +132,6 @@ This pipeline will be called by the webhook in tekton, whenever there is a push 
 
 * It will call the above created 2 tasks as part of running this pipeline.
 
-![ Pipeline](images/10-pipeline-1.png?raw=true "Pipeline")
-![ Pipeline](images/11-pipeline-2.png?raw=true "Pipeline")
+<img src="images/10-pipeline-1.png" width="456" title="Pipeline">
+<img src="images/11-pipeline-2.png" width="456" title="Pipeline">
 
