@@ -83,7 +83,7 @@ The manifest files contains the following
 * GIT secret is available in this file.
 * GIT secret is labeled with the service account.
 
-<img src="images/04-secret-gitr.png" width="456" title="Secret - GIT">
+<img src="images/04-secret-git.png" width="456" title="Secret - GIT">
 
 ### 4. Service Account
 
